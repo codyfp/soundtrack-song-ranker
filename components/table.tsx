@@ -1,4 +1,4 @@
-import { PlusCircleIcon, MinusCircleIcon } from "@heroicons/react/24/outline";
+import { PlusCircleIcon, MinusCircleIcon, MagnifyingGlassCircleIcon } from "@heroicons/react/24/outline";
 import { Cell } from "./cells";
 import axios from "axios";
 import { TableProps, RowProps } from "@/types";
@@ -53,7 +53,16 @@ const Row = ({ rank, name = "", song, editable = false, updateRow, removeRow, on
   return (
     <div className="flex" draggable onDrag={(e) => onDrag(e, name)}>
       <Cell content={rank?.toString()} className="w-[42px]" />
-      <Cell content={name} onChange={updateName} editable={editable} className="min-w-[250px]" />
+      <span className="relative">
+        <Cell content={name} onChange={updateName} editable={editable} className="min-w-[250px]" />
+        {rank && (
+          <span className="absolute right-0 top-[4.5px] text-slate-200">
+            <button className="flex items-center px-2 rounded-md opacity-20 hover:opacity-100">
+              <MagnifyingGlassCircleIcon className="w-6 h-6" />
+            </button>
+          </span>
+        )}
+      </span>
       <Cell content={song} onChange={updateSong} editable={editable} className="min-w-[250px]" />
       {rank && (
         <div className="flex justify-end">

@@ -23,7 +23,6 @@ export default function Home() {
 
   const saveTables = () => {
     if (!!mainTableRows?.[0]?.name) {
-      console.log("Saving tables...", mainTableRows);
       localStorage.setItem("mainTableRows", JSON.stringify(mainTableRows));
     }
   };
@@ -77,10 +76,10 @@ export default function Home() {
           New Ranking Table
         </button>
         <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={saveTables}>
-          Save Tables
+          Save Soundtracks
         </button>
         <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={loadTables}>
-          Load Tables
+          Load Soundtracks
         </button>
       </footer>
     </main>

@@ -1,6 +1,7 @@
+import React from "react";
 
 export type CellProps = {
-  content?: string;
+  content?: string | React.ReactNode;
   className?: string;
   editable?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -38,4 +39,23 @@ export type DropRowProps = {
 export type DropCellProps = {
   className: string;
   draggedItem: string;
+};
+
+export type PlaylistItem = {
+  etag: string;
+  id: string;
+  kind: string;
+};
+
+export type PlaylistInfo = {
+  playlistId: string;
+  etag: string;
+  items: PlaylistItem[];
+  kind: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
+  nextPageToken?: string;
+  prevPageToken?: string;
 };

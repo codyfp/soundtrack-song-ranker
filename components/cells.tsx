@@ -6,7 +6,7 @@ const Cell = ({ content = "", className, editable = false, onChange }: CellProps
     return (
       <input
         className={`${className} px-2 py-1 border border-slate-200 bg-gray-900 text-slate-200 focus:outline-none`}
-        value={content}
+        value={content as string}
         onChange={onChange}
       />
     );

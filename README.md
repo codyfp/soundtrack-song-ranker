@@ -1,6 +1,6 @@
 [Rank Soundtracks](https://song-ranking.vercel.app/)
 
-Use this with friends otherwise that kinda sad (that's what it is built for so ranking tables are customisable for each person to have their own ranking)
+Use this with friends otherwise that kinda sad; built for groups so ranking tables are customisable for each person to have their own ranking
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

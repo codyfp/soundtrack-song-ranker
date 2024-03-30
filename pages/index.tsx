@@ -3,13 +3,13 @@ import Head from "next/head";
 import Table from "@/components/table";
 import DropTable from "@/components/dropTable";
 import { RowProps } from "@/types";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
 
 export default function Home() {
   const [mainTableRows, setMainTableRows] = useState<RowProps[]>([{}]);
   const [selectionTables, setSelectionTables] = useState<RowProps[][]>([[{}]]); //TODO use this for state management of multiple tables to allow saving
   const [draggedItem, setDraggedItem] = useState<string>("");
-
+  const [showSettings, setShowSettings] = useState<boolean>(false);
   if (typeof window !== "undefined") {
     window.onblur = () => {
       saveTables();
@@ -39,6 +39,23 @@ export default function Home() {
         <title>Rank da Soundtracks aye</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Cog6ToothIcon className="absolute top-4 right-4 w-6 h-6" onClick={() => setShowSettings(!showSettings)} />
+      {showSettings ? (
+        <div className="absolute top-8 right-4 flex flex-col">
+          <button
+            className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg text-slate-600 border-slate-600"
+            onClick={() => setSelectionTables([...selectionTables, [{}]])}
+          >
+            New Ranking Table
+          </button>
+          <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={saveTables}>
+            Save Soundtracks
+          </button>
+          <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={loadTables}>
+            Load Soundtracks
+          </button>
+        </div>
+      ) : null}
       <Table
         header={{ name: "Soundtrack", song: "Song" }}
         rows={mainTableRows}
@@ -68,20 +85,6 @@ export default function Home() {
           </button>
         )}
       </div>
-      <footer className="flex gap-10 pb-6">
-        <button
-          className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg text-slate-600 border-slate-600"
-          onClick={() => setSelectionTables([...selectionTables, [{}]])}
-        >
-          New Ranking Table
-        </button>
-        <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={saveTables}>
-          Save Soundtracks
-        </button>
-        <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={loadTables}>
-          Load Soundtracks
-        </button>
-      </footer>
     </main>
   );
 }

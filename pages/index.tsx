@@ -41,7 +41,7 @@ export default function Home() {
       </Head>
       <Cog6ToothIcon className="absolute top-4 right-4 w-6 h-6" onClick={() => setShowSettings(!showSettings)} />
       {showSettings ? (
-        <div className="absolute top-8 right-4 flex flex-col">
+        <div className="absolute top-10 right-4 flex flex-col gap-2">
           <button
             className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg text-slate-600 border-slate-600"
             onClick={() => setSelectionTables([...selectionTables, [{}]])}

@@ -25,12 +25,17 @@ export default function Home() {
   const saveTables = () => {
     if (!!mainTableRows?.[0]?.name) {
       localStorage.setItem("mainTableRows", JSON.stringify(mainTableRows));
+      localStorage.setItem("selectionTables", JSON.stringify(selectionTables));
     }
   };
   const loadTables = () => {
     const mainTableRows = localStorage.getItem("mainTableRows");
     if (mainTableRows) {
       setMainTableRows(JSON.parse(mainTableRows));
+    }
+    const selectionTables = localStorage.getItem("selectionTables");
+    if (selectionTables) {
+      setSelectionTables(JSON.parse(selectionTables));
     }
   };
 
@@ -53,10 +58,10 @@ export default function Home() {
             New Ranking Table
           </button>
           <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={saveTables}>
-            Save Soundtracks
+            Save Tables
           </button>
           <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={loadTables}>
-            Load Soundtracks
+            Load Tables
           </button>
         </div>
       ) : null}

@@ -24,16 +24,30 @@ export type TableProps = {
   onDrag: (e: React.DragEvent<HTMLDivElement>, name: string) => void,
 };
 
+export type SelectionTable = {
+  title?: string;
+  rows: {
+    [key: number]: string;
+  };
+  id: string;
+};
+
 export type DropTableProps = {
   draggedItem: string;
   mainRows: RowProps[];
-  updateTable: (newRows: RowProps[]) => void;
+  updateTable?: (newRows: RowProps[]) => void;
+  title?: string;
+  setTitle: (newTitle: string) => void;
+  selectionTableRows: { [key: number]: string };
+  setRow: (newRow: { rank: number; value: string }) => void;
 };
 
 export type DropRowProps = {
   name?: string;
   rank?: number;
   draggedItem: string;
+  cellContent: string;
+  setCellContent: (newContent: string) => void;
 };
 
 export type DropCellProps = {

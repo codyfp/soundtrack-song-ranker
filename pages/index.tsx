@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import Table from "@/components/table";
 import DropTable from "@/components/dropTable";
-import { RowProps } from "@/types";
+import { RowProps, SelectionTable } from "@/types";
 import { TrashIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
+import createRandomString from "@/utils/createRandomString";
 
 export default function Home() {
   const [mainTableRows, setMainTableRows] = useState<RowProps[]>([{}]);
-  const [selectionTables, setSelectionTables] = useState<RowProps[][]>([[{}]]); //TODO use this for state management of multiple tables to allow saving
+  const [selectionTables, setSelectionTables] = useState<SelectionTable[]>([{ id: createRandomString(), rows: {} }]); //TODO use this for state management of multiple tables to allow saving
   const [draggedItem, setDraggedItem] = useState<string>("");
   const [showSettings, setShowSettings] = useState<boolean>(false);
   if (typeof window !== "undefined") {
@@ -47,7 +48,7 @@ export default function Home() {
         <div className="absolute z-10 flex flex-col gap-2 p-2 top-12 right-4 bg-slate-800 rounded-xl">
           <button
             className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg text-slate-200 border-slate-200"
-            onClick={() => setSelectionTables([...selectionTables, [{}]])}
+            onClick={() => setSelectionTables([...selectionTables, { id: createRandomString(), rows: {} }])}
           >
             New Ranking Table
           </button>
@@ -67,27 +68,43 @@ export default function Home() {
       />
       <div className="flex gap-10">
         {selectionTables.map((table, index) => {
-          const updateTable = (newTable: RowProps[]) => {
+          const { title, rows } = table;
+
+          const setTitle = (newTitle: string) => {
             const newTables = [...selectionTables];
-            newTables[index] = newTable;
+            newTables[index].title = newTitle;
+            setSelectionTables(newTables);
+          };
+
+          const setRow = (newRow: { rank: number; value: string }) => {
+            const newTables = [...selectionTables];
+            newTables[index].rows[newRow.rank] = newRow.value;
             setSelectionTables(newTables);
           };
 
           return (
-            <div className="relative">
+            <div className="relative" key={table.id}>
               {selectionTables.length > 1 && (
                 <button
                   className="absolute right-0 flex items-center p-1 border border-collapse rounded-full h-min w-min border-slate-200 text-slate-200 opacity-40 hover:opacity-100"
                   onClick={() => {
                     const newTables = [...selectionTables];
-                    newTables.splice(selectionTables.length - 1, 1);
+                    newTables.splice(index, 1);
                     setSelectionTables(newTables);
                   }}
                 >
                   <TrashIcon className="w-4 h-4" />
                 </button>
               )}
-              <DropTable key={index} mainRows={mainTableRows} draggedItem={draggedItem} updateTable={updateTable} />
+              <DropTable
+                key={index}
+                mainRows={mainTableRows}
+                selectionTableRows={rows}
+                setRow={setRow}
+                draggedItem={draggedItem}
+                title={title ?? "Rank da tables"}
+                setTitle={setTitle}
+              />
             </div>
           );
         })}

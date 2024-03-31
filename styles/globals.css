@@ -30,6 +30,12 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .highlight {
+    outline-width: 4px;
+    outline-style: solid;
+    outline-color: #34d399;
+    outline-offset: -4px;
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari, and Opera */

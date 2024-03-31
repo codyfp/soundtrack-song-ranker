@@ -14,19 +14,4 @@ const Cell = ({ content = "", className, editable = false, onChange }: CellProps
   return <div className={`${className} px-2 py-1 border border-slate-200`}>{content}</div>;
 };
 
-const DropCell = ({ className, draggedItem }: DropCellProps) => {
-  const [cellContent, setCellContent] = useState<string>("");
-  const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-  const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    setCellContent(draggedItem);
-  };
-  return (
-    <div onDrop={onDrop} onDragOver={onDragOver} className={`${className} px-2 py-1 border border-slate-200`}>
-      {cellContent}
-    </div>
-  );
-};
-
-export { Cell, DropCell };
+export { Cell };

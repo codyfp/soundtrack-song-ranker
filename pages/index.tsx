@@ -33,7 +33,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1 className="text-4xl font-bold">Jordan's Game</h1>
-      <p className="text-lg mt-2">{`A game by someone who isn't Jordan`}</p>
+      <p className="text-lg mt-2">A game by someone who isn&apos;t Jordan</p>
       <motion.nav initial={false} animate={showHelp ? "open" : "closed"}>
         <button onClick={() => setShowHelp(!showHelp)} className="flex flex-col items-center justify-center my-4 gap-2">
           <div className="flex flex-col gap-2">First time playing?</div>

@@ -11,6 +11,7 @@ export default function Home() {
   const [selectionTables, setSelectionTables] = useState<SelectionTable[]>([{ id: createRandomString(), rows: {} }]); //TODO use this for state management of multiple tables to allow saving
   const [draggedItem, setDraggedItem] = useState<string>("");
   const [showSettings, setShowSettings] = useState<boolean>(false);
+
   if (typeof window !== "undefined") {
     window.onblur = () => {
       saveTables();
@@ -94,48 +95,53 @@ export default function Home() {
         setRows={setMainTableRows}
         onDrag={onDrag}
       />
-      <div className="flex gap-10">
-        {selectionTables.map((table, index) => {
-          const { title, rows } = table;
+      <div className={`p-4 flex overflow-hidden items-center z-10 max-w-[100vw]`}>
+        {/* <div className="flex gap-10"> */}
+        <ul role="list" className="flex flex-row gap-2 overflow-x-scroll no-scrollbar w-max snap-x scroll-smooth">
+          {selectionTables.map((table, index) => {
+            const { title, rows } = table;
 
-          const setTitle = (newTitle: string) => {
-            const newTables = [...selectionTables];
-            newTables[index].title = newTitle;
-            setSelectionTables(newTables);
-          };
+            const setTitle = (newTitle: string) => {
+              const newTables = [...selectionTables];
+              newTables[index].title = newTitle;
+              setSelectionTables(newTables);
+            };
 
-          const setRow = (newRow: { rank: number; value: string }) => {
-            const newTables = [...selectionTables];
-            newTables[index].rows[newRow.rank] = newRow.value;
-            setSelectionTables(newTables);
-          };
+            const setRow = (newRow: { rank: number; value: string }) => {
+              const newTables = [...selectionTables];
+              newTables[index].rows[newRow.rank] = newRow.value;
+              setSelectionTables(newTables);
+            };
 
-          return (
-            <div className="relative" key={table.id}>
-              {selectionTables.length > 1 && (
-                <button
-                  className="absolute right-0 flex items-center p-1 border border-collapse rounded-full h-min w-min border-slate-200 text-slate-200 opacity-40 hover:opacity-100"
-                  onClick={() => {
-                    const newTables = [...selectionTables];
-                    newTables.splice(index, 1);
-                    setSelectionTables(newTables);
-                  }}
-                >
-                  <TrashIcon className="w-4 h-4" />
-                </button>
-              )}
-              <DropTable
-                key={index}
-                mainRows={mainTableRows}
-                selectionTableRows={rows}
-                setRow={setRow}
-                draggedItem={draggedItem}
-                title={title ?? "Rank da tables"}
-                setTitle={setTitle}
-              />
-            </div>
-          );
-        })}
+            return (
+              <li key={table.id} className="snap-start">
+                <div className="relative">
+                  {selectionTables.length > 1 && (
+                    <button
+                      className="absolute right-0 flex items-center p-1 border border-collapse rounded-full h-min w-min border-slate-200 text-slate-200 opacity-40 hover:opacity-100"
+                      onClick={() => {
+                        const newTables = [...selectionTables];
+                        newTables.splice(index, 1);
+                        setSelectionTables(newTables);
+                      }}
+                    >
+                      <TrashIcon className="w-4 h-4" />
+                    </button>
+                  )}
+                  <DropTable
+                    key={index}
+                    mainRows={mainTableRows}
+                    selectionTableRows={rows}
+                    setRow={setRow}
+                    draggedItem={draggedItem}
+                    title={title ?? "Rank da tables"}
+                    setTitle={setTitle}
+                  />
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </main>
   );

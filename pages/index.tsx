@@ -29,10 +29,10 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center min-h-screen px-10 pt-10">
       <Head>
-        <title>Jordan's Game</title>
+        <title>Jordan&apos;s Game</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 className="text-4xl font-bold">Jordan's Game</h1>
+      <h1 className="text-4xl font-bold">Jordan&apos;s Game</h1>
       <p className="text-lg mt-2">A game by someone who isn&apos;t Jordan</p>
       <motion.nav initial={false} animate={showHelp ? "open" : "closed"}>
         <button onClick={() => setShowHelp(!showHelp)} className="flex flex-col items-center justify-center my-4 gap-2">

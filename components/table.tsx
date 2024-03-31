@@ -68,7 +68,7 @@ const Row = ({
   const searchPlaylist = async () => {
     setIsSearchingPlaylist(true);
     if (name === "") return;
-    const response = await axios.get(`/api/searchPlaylist?searchQuery=${name} ost`, {
+    const response = await axios.get(`/api/searchPlaylist?searchQuery=${name} soundtrack`, {
       headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_SPOTIFY_API_KEY}` },
     });
     setPlaylistInfo(response.data);

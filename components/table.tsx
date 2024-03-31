@@ -115,7 +115,7 @@ const Row = ({
           href={`https://www.youtube.com/watch?v=${songData.contentDetails.videoId}&list=${playlistInfo?.playlistId}`}
           target="_blank"
           rel="noreferrer"
-          className="underline text-xs whitespace-nowrap"
+          className="text-xs underline whitespace-nowrap"
         >
           {songData.snippet.title} <span className="opacity-80">{songRolled}</span>
         </a>
@@ -126,7 +126,7 @@ const Row = ({
       return (
         <span className="text-slate-200">
           <button
-            className="shadow-md flex gap-1 items-center px-2 rounded-full border border-1 border-slate-200"
+            className="flex items-center gap-1 px-2 border rounded-full shadow-md border-1 border-slate-200"
             onClick={rollSong}
           >
             Playlist of {playlistInfo.pageInfo.totalResults}
@@ -146,12 +146,12 @@ const Row = ({
         {rank && (
           <span className="absolute right-0 top-[4.5px] text-slate-200">
             {playlistInfo?.playlistId ? (
-              <button className="flex items-center px-2 rounded-md opacity-20 hover:opacity-100" onClick={rollSong}>
+              <button className="flex items-center px-2 rounded-md opacity-40 hover:opacity-100" onClick={rollSong}>
                 <Image src="/diceIcon.svg" alt="Dice Icon" width={24} height={24} />
               </button>
             ) : (
               <button
-                className="flex items-center px-2 rounded-md opacity-20 hover:opacity-100"
+                className="flex items-center px-2 rounded-md opacity-40 hover:opacity-100"
                 onClick={searchPlaylist}
               >
                 <MagnifyingGlassCircleIcon className="w-6 h-6" />
@@ -160,13 +160,13 @@ const Row = ({
           </span>
         )}
       </span>
-      <span className="flex relative w-">
+      <span className="relative flex w-">
         <Cell content={songContent} className="w-[250px] flex-grow overflow-x-scroll no-scrollbar" />
       </span>
       {rank && (
         <div className="flex justify-end">
           <button
-            className={`flex items-center px-2 rounded-md opacity-20 hover:opacity-100 text-slate-200`}
+            className={`flex items-center px-2 rounded-md opacity-40 hover:opacity-100 text-slate-200`}
             onClick={removeRow}
           >
             <MinusCircleIcon className="w-6 h-6" />

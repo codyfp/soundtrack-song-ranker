@@ -39,11 +39,14 @@ export default function Home() {
         <title>Rank da Soundtracks aye</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Cog6ToothIcon className="absolute top-4 right-4 w-6 h-6" onClick={() => setShowSettings(!showSettings)} />
+      <Cog6ToothIcon
+        className="absolute w-6 h-6 cursor-pointer top-4 right-4"
+        onClick={() => setShowSettings(!showSettings)}
+      />
       {showSettings ? (
-        <div className="absolute top-10 right-4 flex flex-col gap-2">
+        <div className="absolute z-10 flex flex-col gap-2 p-2 top-12 right-4 bg-slate-800 rounded-xl">
           <button
-            className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg text-slate-600 border-slate-600"
+            className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg text-slate-200 border-slate-200"
             onClick={() => setSelectionTables([...selectionTables, [{}]])}
           >
             New Ranking Table
@@ -70,20 +73,24 @@ export default function Home() {
             setSelectionTables(newTables);
           };
 
-          return <DropTable key={index} mainRows={mainTableRows} draggedItem={draggedItem} updateTable={updateTable} />;
+          return (
+            <div className="relative">
+              {selectionTables.length > 1 && (
+                <button
+                  className="absolute right-0 flex items-center p-1 border border-collapse rounded-full h-min w-min border-slate-200 text-slate-200 opacity-40 hover:opacity-100"
+                  onClick={() => {
+                    const newTables = [...selectionTables];
+                    newTables.splice(selectionTables.length - 1, 1);
+                    setSelectionTables(newTables);
+                  }}
+                >
+                  <TrashIcon className="w-4 h-4" />
+                </button>
+              )}
+              <DropTable key={index} mainRows={mainTableRows} draggedItem={draggedItem} updateTable={updateTable} />
+            </div>
+          );
         })}
-        {selectionTables.length > 1 && (
-          <button
-            className="flex items-center p-1 border border-collapse rounded-full h-min w-min border-slate-200 text-slate-200 opacity-20 hover:opacity-100"
-            onClick={() => {
-              const newTables = [...selectionTables];
-              newTables.splice(selectionTables.length - 1, 1);
-              setSelectionTables(newTables);
-            }}
-          >
-            <TrashIcon className="w-4 h-4" />
-          </button>
-        )}
       </div>
     </main>
   );

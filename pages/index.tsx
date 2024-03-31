@@ -55,13 +55,36 @@ export default function Home() {
             className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg text-slate-200 border-slate-200"
             onClick={() => setSelectionTables([...selectionTables, { id: createRandomString(), rows: {} }])}
           >
-            New Ranking Table
+            Add Ranking Table
           </button>
           <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={saveTables}>
             Save Tables
           </button>
           <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={loadTables}>
             Load Tables
+          </button>
+          <button
+            className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600"
+            onClick={() => {
+              setMainTableRows([{}]);
+              let clearedTables = selectionTables.map((table) => {
+                table.rows = {};
+                return table;
+              });
+              setSelectionTables(clearedTables);
+            }}
+          >
+            Reset Soundtracks
+          </button>
+          <button
+            className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600"
+            onClick={() => {
+              saveTables();
+              setMainTableRows([{}]);
+              setSelectionTables([{ id: createRandomString(), rows: {} }]);
+            }}
+          >
+            Reset Everything
           </button>
         </div>
       ) : null}

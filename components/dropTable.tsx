@@ -4,6 +4,7 @@ import { DropRowProps, DropTableProps } from "@/types";
 
 const DropTable = (props: DropTableProps) => {
   const { selectionTableRows, draggedItem, title, setTitle, mainRows, setRow } = props;
+
   return (
     <div className="overflow-hidden rounded-m">
       <div className="flex flex-row gap-2">
@@ -46,6 +47,7 @@ const Row = ({ rank, draggedItem, cellContent, setCellContent }: DropRowProps) =
     e.preventDefault();
     setIsDraggedOver(false);
   };
+
   const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
     setCellContent(draggedItem);
     setIsDraggedOver(false);
@@ -55,6 +57,7 @@ const Row = ({ rank, draggedItem, cellContent, setCellContent }: DropRowProps) =
       setHasBeenDropped(false);
     }, 1000);
   };
+
   return (
     <div
       className={`flex border-2 border-slate-200 ${isDraggedOver ? "bg-slate-800 animate-bounce" : ""} ${

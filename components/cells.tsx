@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { CellProps, DropCellProps } from "@/types";
+import { CellProps } from "@/types";
 
 const Cell = ({ content = "", className, editable = false, onChange }: CellProps) => {
   if (editable) {

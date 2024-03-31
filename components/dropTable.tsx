@@ -48,8 +48,9 @@ const Row = ({ rank, draggedItem, cellContent, setCellContent }: DropRowProps) =
   };
   const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
     setCellContent(draggedItem);
-    setHasBeenDropped(true);
     setIsDraggedOver(false);
+    if (!draggedItem) return;
+    setHasBeenDropped(true);
     setTimeout(() => {
       setHasBeenDropped(false);
     }, 1000);

@@ -3,7 +3,7 @@ import Head from "next/head";
 import Table from "@/components/table";
 import DropTable from "@/components/dropTable";
 import { RowProps, SelectionTable } from "@/types";
-import { TrashIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, Cog6ToothIcon, PaintBrushIcon } from "@heroicons/react/24/outline";
 import createRandomString from "@/utils/createRandomString";
 
 export default function Play() {
@@ -46,6 +46,13 @@ export default function Play() {
         <title>Rank da Soundtracks aye</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div
+        draggable
+        className="absolute cursor-grab top-4 right-16 opacity-40 hover:opacity-100"
+        onDrag={(e) => onDrag(e, "")}
+      >
+        <PaintBrushIcon className="w-6 h-6 " />
+      </div>
       <Cog6ToothIcon
         className="absolute w-6 h-6 cursor-pointer top-4 right-4"
         onClick={() => setShowSettings(!showSettings)}

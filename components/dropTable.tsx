@@ -52,12 +52,12 @@ const Row = ({ rank, draggedItem, cellContent, setCellContent }: DropRowProps) =
     setIsDraggedOver(false);
     setTimeout(() => {
       setHasBeenDropped(false);
-    }, 400);
+    }, 1000);
   };
   return (
     <div
-      className={`flex border-2 border-slate-200 ${isDraggedOver ? "bg-slate-800 animate-pulse" : ""} ${
-        hasDropped ? "highlight" : ""
+      className={`flex border-2 border-slate-200 ${isDraggedOver ? "bg-slate-800 animate-bounce" : ""} ${
+        hasDropped ? "highlight animate-spin" : ""
       } ${rank == 1 ? "border-t-2" : "border-t"}`}
     >
       <Cell content={rank?.toString()} className="w-[42px] border-none" />

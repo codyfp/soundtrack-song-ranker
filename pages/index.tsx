@@ -23,7 +23,7 @@ export default function Home() {
     timer.current = setTimeout(() => {
       position < MEDIA_OPTIONS.length - 1 ? setPosition(position + 1) : setPosition(0);
     }, 2000);
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer.current ?? 0);
   }, [position]);
 
   return (

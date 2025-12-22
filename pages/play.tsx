@@ -44,7 +44,7 @@ export default function Play() {
     <main className="flex flex-col items-center justify-between min-h-screen px-10 pt-10">
       <Head>
         <title>Rank da Soundtracks aye</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/tree.png" />
       </Head>
       <div
         draggable

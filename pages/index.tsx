@@ -30,7 +30,7 @@ export default function Home() {
     <main className="flex flex-col items-center min-h-screen px-10 pt-10">
       <Head>
         <title>Jordan&apos;s Game</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/tree.png" />
       </Head>
       <h1 className="text-4xl font-bold">Jordan&apos;s Game</h1>
       <p className="text-lg mt-2">A game by someone who isn&apos;t Jordan</p>

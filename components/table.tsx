@@ -6,7 +6,7 @@ import { PlusCircleIcon, MinusCircleIcon, MagnifyingGlassCircleIcon } from "@her
 import { Cell } from "./cells";
 import randomNumber from "@/utils/randomNumber";
 
-const Table = ({ header, rows, setRows, onDrag }: TableProps) => {
+const Table = ({ header, rows, setRows, onDrag, setVideo }: TableProps) => {
   return (
     <div>
       <div className="overflow-hidden rounded-m">
@@ -30,13 +30,14 @@ const Table = ({ header, rows, setRows, onDrag }: TableProps) => {
               updateRow={updateRow}
               removeRow={removeRow}
               onDrag={onDrag}
+              setVideo={setVideo}
               {...row}
             />
           );
         })}
       </div>
       <div className="flex justify-end">
-        <button className="flex items-center p-2 rounded-md text-slate-200" onClick={() => setRows([...rows, {}])}>
+        <button className="flex items-center p-2 rounded-md " onClick={() => setRows([...rows, {}])}>
           <PlusCircleIcon className="w-6 h-6" />
           <span className="ml-2">Add Row</span>
         </button>
@@ -53,6 +54,7 @@ const Row = ({
   updateRow,
   removeRow,
   onDrag = () => {},
+  setVideo = () => {},
 }: RowProps) => {
   const [playlistInfo, setPlaylistInfo] = useState<PlaylistInfo>();
   const [isSearchingPlaylist, setIsSearchingPlaylist] = useState<Boolean>(false);
@@ -111,20 +113,23 @@ const Row = ({
     }
     if (songData?.snippet.title) {
       return (
-        <a
-          href={`https://www.youtube.com/watch?v=${songData.contentDetails.videoId}&list=${playlistInfo?.playlistId}`}
-          target="_blank"
-          rel="noreferrer"
-          className="text-xs underline whitespace-nowrap"
+        <div
+          onClick={() =>
+            setVideo({
+              title: songData.snippet.title,
+              id: songData.contentDetails.videoId,
+            })
+          }
+          className="text-xs underline whitespace-nowrap cursor-pointer"
         >
           {songData.snippet.title} <span className="opacity-80">{songRolled}</span>
-        </a>
+        </div>
       );
     }
 
     if (playlistInfo?.pageInfo?.totalResults && playlistInfo.pageInfo.totalResults > 0) {
       return (
-        <span className="text-slate-200">
+        <span>
           <button
             className="flex items-center gap-1 px-2 border rounded-full shadow-md border-1 border-slate-200"
             onClick={rollSong}
@@ -144,7 +149,7 @@ const Row = ({
       <span className="relative">
         <Cell content={name} onChange={updateName} editable={editable} className="min-w-[250px]" />
         {rank && (
-          <span className="absolute right-0 top-[4.5px] text-slate-200">
+          <span className="absolute right-0 top-[4.5px]">
             {playlistInfo?.playlistId ? (
               <button className="flex items-center px-2 rounded-md opacity-40 hover:opacity-100" onClick={rollSong}>
                 <Image src="/diceIcon.svg" alt="Dice Icon" width={24} height={24} />
@@ -165,10 +170,7 @@ const Row = ({
       </span>
       {rank && (
         <div className="flex justify-end">
-          <button
-            className={`flex items-center px-2 rounded-md opacity-40 hover:opacity-100 text-slate-200`}
-            onClick={removeRow}
-          >
+          <button className={`flex items-center px-2 rounded-md opacity-40 hover:opacity-100`} onClick={removeRow}>
             <MinusCircleIcon className="w-6 h-6" />
           </button>
         </div>

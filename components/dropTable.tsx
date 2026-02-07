@@ -9,7 +9,7 @@ const DropTable = (props: DropTableProps) => {
     <div className="overflow-hidden rounded-m">
       <div className="flex flex-row gap-2">
         <input
-          className="p-2 underline bg-black border-none focus:outline-none text-slate-200"
+          className="p-2 underline bg-black border-none focus:outline-none"
           value={title}
           defaultValue={"Rank da tables"}
           onChange={(e) => setTitle(e.target.value)}

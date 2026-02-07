@@ -15,6 +15,7 @@ export type RowProps = {
   updateRow?: (newRow: RowProps) => void;
   removeRow?: () => void;
   onDrag?: (e: React.DragEvent<HTMLDivElement>, name: string) => void;
+  setVideo?: ({ title, id }: { title: string; id: string }) => void;
 };
 
 export type TableProps = {
@@ -22,6 +23,7 @@ export type TableProps = {
   rows: RowProps[];
   setRows: (newRows: RowProps[]) => void,
   onDrag: (e: React.DragEvent<HTMLDivElement>, name: string) => void,
+  setVideo: ({ title, id }: { title: string; id: string }) => void;
 };
 
 export type SelectionTable = {

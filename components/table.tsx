@@ -131,11 +131,11 @@ const Row = ({
       return (
         <span>
           <button
-            className="flex items-center gap-1 px-2 border rounded-full shadow-md border-1 border-slate-200"
+            className="flex items-center gap-1 px-2 border rounded-full shadow-md border-textCol hover:scale-105 text-sm"
             onClick={rollSong}
           >
             Playlist of {playlistInfo.pageInfo.totalResults}
-            <Image src="/diceIcon.svg" alt="Dice Icon" width={24} height={24} />
+            <Image src="/diceIcon.svg" alt="Dice Icon" width={22} height={22} />
           </button>
         </span>
       );
@@ -165,7 +165,7 @@ const Row = ({
           </span>
         )}
       </span>
-      <span className="relative flex w-">
+      <span className="relative flex">
         <Cell content={songContent} className="w-[250px] flex-grow overflow-x-scroll no-scrollbar" />
       </span>
       {rank && (

@@ -59,7 +59,7 @@ export default function Home() {
                 },
               },
             }}
-            className="flex flex-col gap-2 p-4 rounded-xl bg-slate-800 w-[500px]"
+            className="flex flex-col gap-2 p-4 rounded-xl bg-surface w-[500px]"
           >
             <motion.li variants={itemVariants}>
               Enter any number of {MEDIA_OPTIONS[position]} that have a soundtrack

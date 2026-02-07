@@ -53,8 +53,47 @@ export default function Play() {
         <title>Rank da Soundtracks aye</title>
         <link rel="icon" href="/tree.png" />
       </Head>
-      <div className="absolute top-5 right-8 flex gap-4 z-20">
-        <Cog6ToothIcon className=" w-6 h-6 cursor-pointer" onClick={() => setShowSettings(!showSettings)} />
+      <div className={`absolute top-2 right-2 z-50 ${video ? "hidden" : "block"}`}>
+        <Cog6ToothIcon className={`w-6 h-6 cursor-pointer m-4`} onClick={() => setShowSettings(!showSettings)} />
+        {showSettings ? (
+          <div className="absolute z-60 flex flex-col gap-2 p-2 top-12 right-4 bg-surface rounded-xl w-max shadow-lg">
+            <button
+              className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg border-textCol"
+              onClick={() => setSelectionTables([...selectionTables, { id: createRandomString(), rows: {} }])}
+            >
+              Add Ranking Table
+            </button>
+            <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-primary" onClick={saveTables}>
+              Save Tables
+            </button>
+            <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-primary" onClick={loadTables}>
+              Load Tables
+            </button>
+            <button
+              className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-primary"
+              onClick={() => {
+                setMainTableRows([{}]);
+                let clearedTables = selectionTables.map((table) => {
+                  table.rows = {};
+                  return table;
+                });
+                setSelectionTables(clearedTables);
+              }}
+            >
+              Reset Soundtracks
+            </button>
+            <button
+              className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-primary"
+              onClick={() => {
+                saveTables();
+                setMainTableRows([{}]);
+                setSelectionTables([{ id: createRandomString(), rows: {} }]);
+              }}
+            >
+              Reset Everything
+            </button>
+          </div>
+        ) : null}
       </div>
       <div className="absolute bottom-4 right-8 flex gap-4 z-20">
         <div draggable className="cursor-grab opacity-40 hover:opacity-100 flex" onDrag={(e) => onDrag(e, "")}>
@@ -62,47 +101,8 @@ export default function Play() {
           <PaintBrushIcon className="pl-1 w-6 h-6 " />
         </div>
       </div>
-      {showSettings ? (
-        <div className="absolute z-10 flex flex-col gap-2 p-2 top-12 right-4 bg-slate-800 rounded-xl">
-          <button
-            className="px-4 py-2 border rounded-full hover:scale-105 drop-shadow-lg border-slate-200"
-            onClick={() => setSelectionTables([...selectionTables, { id: createRandomString(), rows: {} }])}
-          >
-            Add Ranking Table
-          </button>
-          <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={saveTables}>
-            Save Tables
-          </button>
-          <button className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600" onClick={loadTables}>
-            Load Tables
-          </button>
-          <button
-            className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600"
-            onClick={() => {
-              setMainTableRows([{}]);
-              let clearedTables = selectionTables.map((table) => {
-                table.rows = {};
-                return table;
-              });
-              setSelectionTables(clearedTables);
-            }}
-          >
-            Reset Soundtracks
-          </button>
-          <button
-            className="px-4 py-2 rounded-full hover:scale-105 drop-shadow-lg bg-slate-600"
-            onClick={() => {
-              saveTables();
-              setMainTableRows([{}]);
-              setSelectionTables([{ id: createRandomString(), rows: {} }]);
-            }}
-          >
-            Reset Everything
-          </button>
-        </div>
-      ) : null}
       <div className="flex flex-col items-center w-full">
-        <div className="w-full bg-slate-800 content-center flex flex-row">
+        <div className="w-full bg-surface content-center flex flex-row">
           <div
             className={`p-4 flex overflow-hidden items-center justify-center z-10 transition-all duration-300 ease-in-out ${video ? "w-1/2" : "w-full"} relative`}
           >
@@ -137,7 +137,7 @@ export default function Play() {
             ) : null}
           </div>
         </div>
-        <div className={`p-4 flex overflow-hidden items-center z-10 max-w-[100vw]`}>
+        <div className={`p-4 flex overflow-x-hidden items-center z-10 max-w-[100vw]`}>
           <ul role="list" className="flex flex-row gap-2 overflow-x-scroll no-scrollbar w-max snap-x scroll-smooth">
             {selectionTables.map((table, index) => {
               const { title, rows } = table;
@@ -159,7 +159,7 @@ export default function Play() {
                   <div className="relative">
                     {selectionTables.length > 1 && (
                       <button
-                        className="absolute right-0 flex items-center p-1 border border-collapse rounded-full h-min w-min border-slate-200 opacity-40 hover:opacity-100"
+                        className="absolute right-0 flex items-center p-1 border border-collapse rounded-full h-min w-min border-textCol opacity-40 hover:opacity-100"
                         onClick={() => {
                           const newTables = [...selectionTables];
                           newTables.splice(index, 1);

@@ -60,7 +60,7 @@ const Row = ({ rank, draggedItem, cellContent, setCellContent }: DropRowProps) =
 
   return (
     <div
-      className={`flex border-2 border-textCol ${isDraggedOver ? "bg-surface animate-bounce" : ""} ${
+      className={`flex border-2 border-textCol ${isDraggedOver ? "bg-surface animate-ping" : ""} ${
         hasDropped ? "highlight animate-spin" : ""
       } ${rank == 1 ? "border-t-2" : "border-t"}`}
     >

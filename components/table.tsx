@@ -37,6 +37,17 @@ const Table = ({ header, rows, setRows, onDrag, setVideo }: TableProps) => {
         })}
       </div>
       <div className="flex justify-end">
+        {/* Button to randomize the row orders */}
+        <button
+          className="flex items-center p-2 rounded-md ml-2"
+          onClick={() => {
+            const shuffledRows = [...rows].sort(() => Math.random() - 0.5);
+            setRows(shuffledRows);
+          }}
+        >
+          <Image src="/diceIcon.svg" alt="Shuffle Icon" width={24} height={24} />
+          <span className="ml-2">Shuffle Rows</span>
+        </button>
         <button className="flex items-center p-2 rounded-md " onClick={() => setRows([...rows, {}])}>
           <PlusCircleIcon className="w-6 h-6" />
           <span className="ml-2">Add Row</span>
